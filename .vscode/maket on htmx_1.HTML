@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Макет страницы</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/htmx.org@1.9.3"></script>
+    <style>
+        body {
+            font-family: Merriweather;
+            border: 1px solid #E1E1E1;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            border: 1px solid #E1E1E1;
+            color: #343030;
+            width: 100%;
+            max-width: 1920px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center; /* Выравнивание по центру по вертикали */
+            justify-content: space-between; /* Пробел между элементами */
+        }
+
+        /* Логотип */
+        .logo img {
+            width: 70px; /* Устанавливаем ширину автоматически */
+            height: 70px; /* Ограничиваем высоту */
+            object-fit: contain; /* Масштабируем изображение так, чтобы оно полностью помещалось внутри контейнера */
+            margin-left: 157px;
+        }
+ 
+        nav a{
+            display: flex;
+            gap: 40px; /* Промежуток между ссылками навигации */
+            color: #555555;
+            text-decoration: none; /* Убирает подчёркивание */
+        }
+
+        /* Контейнер для карточек */
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Промежуток между карточками */
+            background: #FFFFFF; /* Цвет фона для карточек */
+        }
+
+        .card {
+            width: 280px;
+            height: 328px;
+            border: 1px solid #E1E1E1;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+        }
+
+        .author, .title {
+            font-size: 18px;
+            font-weight: Merriweather;
+            margin-bottom: 10px;
+            margin-left: 25px;
+        }
+
+        /* Изображения внутри карточек */
+        .card img {
+            width: 280px;
+            height: 168px;
+            margin-bottom: 5px; /* Отступ после изображения */
+        }
+        
+        .card:nth-child(4) {
+            opacity: 0.5;
+        }
+
+        .price {
+            font-family: Merriweather;
+            font-size: 16px;
+            font-weight: 700;
+            margin-left: 25px;
+            margin-top: 35px;
+        }
+
+        .prices {
+            font-family: Merriweather;
+            font-size: 16px;
+            font-weight: 700;
+            margin-left: 25px;
+            margin-top: 25px;
+        }
+
+        .buy-button {
+            background: #343030;
+            color: white;
+            cursor: pointer;
+            padding: 10px 15px; /* Размер кнопки */
+        }
+
+        .bought {
+            margin-left: 25px;
+            margin-top: 35px;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0; 
+            box-sizing: border-box; /*box-sizing для управления размером элементов */
+        }
+        *, *::before, *::after {
+            box-sizing: inherit; /*все элементы наследуют box-sizing */
+        }
+
+        footer {
+            background: #ECEAEA;
+            color: #343030;
+            width: 100%;
+            max-width: 1920px;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between; /* Распределяем элементы по ширине */
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .contact img {
+            height: 20px;
+            vertical-align: middle;
+        }
+
+        .contact {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        footer nav a, nav {
+            display: inline-flex; /* Используем inline-flex для размещения ссылок в ряд */
+            gap: 40px; /* Расстояние между ссылками */
+        }
+
+        footer a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .loader {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 20px;
+            height: 20px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://i.pinimg.com/originals/99/b1/6b/99b16b6709ffa6edb3ef873419a829a3.jpg" alt="Изображение">
+        </div>
+        <nav>
+            <a>Каталог</a>
+            <a>Доставка</a>
+            <a>Оплата</a>
+            <a>Контакты</a>
+            <a>О галерее</a>
+        </nav>
+        
+        <div style="display: flex; align-items: center;">
+            <input type="text" 
+                   style="width: 416px; height: 48px; 
+                          border: 1px solid #E1E1E1; 
+                          opacity: 1; 
+                          padding: 5px 10px;
+                          box-sizing: border-box;" 
+                   placeholder="Поиск по названию картины"/>
+            <button style="width: 122px; height: 48px; 
+                           background: #403432; 
+                           color: white; 
+                           border: none; 
+                           cursor: pointer;">
+                Найти
+            </button>
+        </div>
+    </header>
+
+<main>
+    <h1>Картины эпохи Возрождения</h1>
+
+        <div class="card-container">
+            <div class="card" style="position: relative;">
+                <img src="https://otvet.imgsmail.ru/download/69904141_6bc17d274db3f01465adc53ede35f272_800.jpg" alt="Рождение Венеры">
+                <div class="title">&laquo;Рождение Венеры&raquo;</div>
+                <div class="author">Сандро Боттичелли</div>
+            <div class="prices">
+                <div style="color: lightgray; text-decoration: line-through;">2 000 000$</div>
+                <div style="color: black;">1 000 000$</div>
+            </div>
+    
+            <div class="button-container" style="position: absolute; bottom: 30px; right: 20px;">
+                <button class="buy-button" 
+                hx-post="https://reqres.in/api/products/1"  
+                hx-target="this" 
+                hx-swap="innerHTML"
+                hx-headers='{"Content-Type": "application/json"}'
+                data-id="1"
+                hx-on="htmx:beforeRequest: this.textContent='Загрузка...'; this.style.backgroundColor='#5B3A32';"
+                hx-on="htmx:response: 
+                function(response) {
+                    if (response.status === 201) {
+                        localStorage.setItem('art-1', 'in-cart');
+                        this.textContent = 'В корзине'; 
+                        this.disabled = true;
+                        this.style.backgroundColor = '#5B3A32';
+                    } else {
+                        this.textContent = 'Купить';
+                    }
+                }"
+                hx-on="htmx:afterRequest: console.log('Запрос завершён!');">
+                Купить
+            </button>
+            </div>
+            </div>
+    
+            <div class="card" style="position: relative;">
+                <img src="https://avatars.mds.yandex.net/get-entity_search/1727623/355977653/S600xU_2x" alt="Тайная вечерня">
+                <div class="title">&laquo;Тайная вечерня&raquo;</div>
+                <div class="author">Леонардо да Винчи</div>
+                <div class="price">3 000 000 $</div>
+                <div class="button-container" style="position: absolute; bottom: 30px; right: 20px;">
+                    <button class="buy-button" 
+                    hx-post="https://reqres.in/api/products/2"  
+                    hx-target="this" 
+                    hx-swap="innerHTML" 
+                    hx-headers='{"Content-Type": "application/json"}'
+                    data-id="2"
+                    hx-on="htmx:beforeRequest: this.textContent='Загрузка...'; this.style.backgroundColor='#5B3A32';"
+                    hx-on="htmx:response: 
+                    function(response) {
+                        if (response.status === 201) {
+                            localStorage.setItem('art-2', 'in-cart');
+                            this.textContent = 'В корзине';
+                            this.disabled = true;
+                            this.style.backgroundColor = '#5B3A32';
+                        } else {
+                            this.textContent = 'Купить';
+                        }
+                    }"
+                    hx-on="htmx:afterRequest: console.log('Запрос завершён!');">
+                    Купить
+                </button>
+                </div>
+            </div>
+    
+            <div class="card" style="position: relative;">
+                <img src="https://avatars.mds.yandex.net/get-entity_search/61037/144851723/S600xU_2x" alt="Сотворение Адама">
+                <div class="title">&laquo;Сотворение Адама&raquo;</div>
+                <div class="author">Микеланджело</div>
+            <div class="prices">
+                    <div style="color: lightgray; text-decoration: line-through;">6 000 000$</div>
+                    <div>5 000 000$</div>
+            </div>
+                
+            <div class="button-container" style="position: absolute; bottom: 30px; right: 20px;">
+                <button class="buy-button" 
+                hx-post="https://reqres.in/api/products/3"  
+                hx-target="this" 
+                hx-swap="innerHTML" 
+                hx-headers='{"Content-Type": "application/json"}'
+                data-id="3"
+                hx-on="htmx:beforeRequest: this.textContent='Загрузка...'; this.style.backgroundColor='#5B3A32';"
+                hx-on="htmx:response: 
+                function(response) {
+                    if (response.status === 201) {
+                        localStorage.setItem('art-3', 'in-cart');
+                        this.textContent = 'В корзине';
+                        this.disabled = true;
+                        this.style.backgroundColor = '#5B3A32';
+                    } else {
+                        this.textContent = 'Купить';
+                    }
+                }"
+                hx-on="htmx:afterRequest: console.log('Запрос завершён!');">
+                Купить
+            </button>
+            </div>
+            </div>
+
+        <div class="card" alt="bought">
+            <img src="https://avatars.mds.yandex.net/get-entity_search/5663642/551783341/S600xU_2x" alt="Урок анатомии">
+            <div class="title">&laquo;Урок анатомии&raquo;</div>
+            <div class="author">Рембрандт</div>
+            <div class="bought">Продана на аукционе</div>
+        </div>
+    </div>
+</main>
+
+    <footer>
+        <div class="logo">
+            <img src="https://i.pinimg.com/originals/99/b1/6b/99b16b6709ffa6edb3ef873419a829a3.jpg" alt="Изображение">
+        </div>
+        <nav>
+            <a>Каталог</a>
+            <a>Доставка</a>
+            <a>Оплата</a>
+            <a>Контакты</a>
+            <a>О галерее</a>
+        </nav>
+        <div class="contact">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Breezeicons-actions-32-call-start.svg/2048px-Breezeicons-actions-32-call-start.svg.png" alt="Телефон">
+            <div class="phone">+7(495)555-55-55</div>
+        </div>
+        <div class="contact">
+            <img src="https://assets.sayurbox.com/assets/images/icons/geolocation/ic-pin-location-black-34accb7e7823e50c498b.png" alt="Местоположение">
+            <div class="geolocation">г.Москва, ул.Расплетина, 24</div>
+        </div>
+    </footer>
+</body>
+</html>
+
+
